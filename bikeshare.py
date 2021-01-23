@@ -16,7 +16,7 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-
+    
     # Check that city input is one of the possible options
     while True:
         try:
@@ -42,7 +42,7 @@ def get_filters():
     #Check that day input is one of possible options
     days_options = ['all','monday','tuesday','wednesday','thursday','friday','saturday','sunday']
     day = input('Type the day of the week you would like to anaylze:').lower()
-
+    
     while day not in days_options:
         print('This is not a valid day, please type another day or write all for all days\n')
         day = input('Type the day of the week you would like to anaylze:').lower()
@@ -68,6 +68,8 @@ def load_data(city, month, day):
     """
     #Read in data for city
     df = pd.read_csv(CITY_DATA[city])
+    #Rename blank column
+    df = df.rename(columns={'Unnamed: 0':'Trip ID'})
     #Convert start time to datetime type
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     #Create column for month name
@@ -79,7 +81,7 @@ def load_data(city, month, day):
         pass
     else:
         df = df.loc[df['Start Month'] == month]
-
+  
     #filter data based on day input
     if day == 'all':
         pass
@@ -128,7 +130,7 @@ def station_stats(df):
     #Display most common start and end station combination
     common_combo = df['Station Combo'].mode()[0]
     print('The most frequent station to station trip is: ', common_combo)
-
+    
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -138,7 +140,7 @@ def trip_duration_stats(df):
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
-
+    
     #Convert total travel time
     Total_time = df['Trip Duration'].sum()
     Total_hours = int(Total_time//3600)
@@ -173,8 +175,8 @@ def user_stats(df):
         df['Count'] = 1
         Gender = df.groupby('Gender').count()
         print('The counts for each gender are:\n',Gender['Count'].to_string(header=None),'\n')
-        df.drop(columns=['Count'])
-
+        
+    
     #Display max, min, and most common birth year if data available
     if 'Birth Year' not in df.columns:
         print('There is no birth year information available in this data set.\n')
@@ -189,8 +191,25 @@ def user_stats(df):
 
 def display_data(df):
     """Display 5 lines of data until user inputs no"""
-
-
+    #Ask user if they want to see the individual trip data
+    view_data = str(input('\nWould you like to view 5 rows of individual trip data?\n')).lower()
+    #Set the start location to 6 to show the first 5 rows of data
+    start_loc = 6
+    #Remove columns created in analysis
+    df = df.drop(columns = ['Station Combo','Count'])
+    #Show the first 5 rows of data and ask the user if they would like to see 5 more rows.
+    while view_data == 'yes':
+        print("\nHere is the individual bikeshare data:")
+        print(df.iloc[0:start_loc])
+        more_data = str(input('\nWould you like to see the following 5 rows of data?\n')).lower()
+        if more_data == 'yes':
+            start_loc += 5
+            print(print(df.iloc[0:start_loc]))
+            print(more_data)
+        else:
+            print('\nOkay, you can always view more data later by restarting the program.')
+            break
+    
 
 def main():
     while True:
