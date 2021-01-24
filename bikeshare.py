@@ -2,7 +2,7 @@ import time
 import pandas as pd
 import numpy as np
 
-CITY_DATA = { 'chicago': 'chicago.csv',
+city_data = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
@@ -16,12 +16,12 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    
+
     # Check that city input is one of the possible options
     while True:
         try:
             city = input('Type the name of the city you would like to analyze:').lower()
-            city not in CITY_DATA[city]
+            city not in city_data[city]
         except:
             print("This is not a valid city, please try one of the following cities: washington, chicago, or new york city\n")
         else:
@@ -42,7 +42,7 @@ def get_filters():
     #Check that day input is one of possible options
     days_options = ['all','monday','tuesday','wednesday','thursday','friday','saturday','sunday']
     day = input('Type the day of the week you would like to anaylze:').lower()
-    
+
     while day not in days_options:
         print('This is not a valid day, please type another day or write all for all days\n')
         day = input('Type the day of the week you would like to anaylze:').lower()
@@ -67,7 +67,7 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     #Read in data for city
-    df = pd.read_csv(CITY_DATA[city])
+    df = pd.read_csv(city_data[city])
     #Rename blank column
     df = df.rename(columns={'Unnamed: 0':'Trip ID'})
     #Convert start time to datetime type
@@ -81,7 +81,7 @@ def load_data(city, month, day):
         pass
     else:
         df = df.loc[df['Start Month'] == month]
-  
+
     #filter data based on day input
     if day == 'all':
         pass
@@ -130,7 +130,7 @@ def station_stats(df):
     #Display most common start and end station combination
     common_combo = df['Station Combo'].mode()[0]
     print('The most frequent station to station trip is: ', common_combo)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -140,20 +140,20 @@ def trip_duration_stats(df):
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
-    
+
     #Convert total travel time
-    Total_time = df['Trip Duration'].sum()
-    Total_hours = int(Total_time//3600)
-    Total_minutes = int((Total_time//60) - (Total_hours*60))
-    Total_seconds = int(Total_time - ((Total_minutes*60)+(Total_hours*3600)))
-    print('The total trip travel time is: ', Total_hours, ' hours, ', Total_minutes, ' minutes, and ', Total_seconds, 'seconds')
+    total_time = df['Trip Duration'].sum()
+    total_hours = int(total_time//3600)
+    total_minutes = int((total_time//60) - (total_hours*60))
+    total_seconds = int(total_time - ((total_minutes*60)+(total_hours*3600)))
+    print('The total trip travel time is: ', total_hours, ' hours, ', total_minutes, ' minutes, and ', total_seconds, 'seconds')
 
     #Convert mean travel time
-    Mean_time = df['Trip Duration'].mean()
-    Mean_hours = int(Mean_time//3600)
-    Mean_minutes = int((Mean_time//60) - (Mean_hours*60))
-    Mean_seconds = int(Mean_time - ((Mean_minutes*60)+(Mean_hours*3600)))
-    print('The mean travel time is:', Mean_hours, 'hours, ', Mean_minutes, 'minutes, and ', Mean_seconds, 'seconds')
+    mean_time = df['Trip Duration'].mean()
+    mean_hours = int(mean_time//3600)
+    mean_minutes = int((mean_time//60) - (mean_hours*60))
+    mean_seconds = int(mean_time - ((mean_minutes*60)+(mean_hours*3600)))
+    print('The mean travel time is:', mean_hours, 'hours, ', mean_minutes, 'minutes, and ', mean_seconds, 'seconds')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -173,10 +173,10 @@ def user_stats(df):
         print('There is no gender information availabe in the data set.\n')
     else:
         df['Count'] = 1
-        Gender = df.groupby('Gender').count()
-        print('The counts for each gender are:\n',Gender['Count'].to_string(header=None),'\n')
-        
-    
+        gender = df.groupby('Gender').count()
+        print('The counts for each gender are:\n',gender['Count'].to_string(header=None),'\n')
+
+
     #Display max, min, and most common birth year if data available
     if 'Birth Year' not in df.columns:
         print('There is no birth year information available in this data set.\n')
@@ -209,7 +209,7 @@ def display_data(df):
         else:
             print('\nOkay, you can always view more data later by restarting the program.')
             break
-    
+
 
 def main():
     while True:
