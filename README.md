@@ -11,33 +11,31 @@ This project was created for the Udacity nanodegree in Programming for Data Scie
 
 ### Files used
 This project uses three csv files with 3,000 individual bikeshare trip data for:
- *Chicago
-    *Start Time
-    *End Time
-    *Trip Duration
-    *Start Station
-    *End Station
-    *User Type
-    *Gender
-    *Birth Year
- *New York City
-   *Start Time
-   *End Time
-   *Trip Duration
-   *Start Station
-   *End Station
-   *User Type
-   *Gender
-   *Birth Year
- *Washington
-   *Start Time
-   *End Time
-   *Trip Duration
-   *Start Station
-   *End Station
-   *User Type
-   *Gender
-   *Birth Year
- 
+ * Chicago
+  * Start Time
+  * End Time
+  * Trip Duration
+  * Start Station
+  * End Station
+  * User Type
+  * Gender
+  * Birth Year
+ * New York City
+   * Start Time
+   * End Time
+   * Trip Duration
+   * Start Station
+   * End Station
+   * User Type
+   * Gender
+   * Birth Year
+ * Washington
+   * Start Time
+   * End Time
+   * Trip Duration
+   * Start Station
+   * End Station
+   * User Type
+
 ### Credits
 Udacity's Nanodegree in Programming for Data Science in Python provided an outline of code for the project and all of the bikeshare data. Functions and operations used in this project were learned in the Python course of the nanodegree program.
