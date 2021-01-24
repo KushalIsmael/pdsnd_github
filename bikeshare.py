@@ -16,7 +16,7 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    
+
     # Check that city input is one of the possible options
     while True:
         try:
@@ -42,7 +42,7 @@ def get_filters():
     #Check that day input is one of possible options
     days_options = ['all','monday','tuesday','wednesday','thursday','friday','saturday','sunday']
     day = input('Type the day of the week you would like to anaylze:').lower()
-    
+
     while day not in days_options:
         print('This is not a valid day, please type another day or write all for all days\n')
         day = input('Type the day of the week you would like to anaylze:').lower()
@@ -81,7 +81,7 @@ def load_data(city, month, day):
         pass
     else:
         df = df.loc[df['Start Month'] == month]
-  
+
     #filter data based on day input
     if day == 'all':
         pass
@@ -130,7 +130,7 @@ def station_stats(df):
     #Display most common start and end station combination
     common_combo = df['Station Combo'].mode()[0]
     print('The most frequent station to station trip is: ', common_combo)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -140,7 +140,7 @@ def trip_duration_stats(df):
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
-    
+
     #Convert total travel time
     Total_time = df['Trip Duration'].sum()
     Total_hours = int(Total_time//3600)
@@ -175,8 +175,8 @@ def user_stats(df):
         df['Count'] = 1
         Gender = df.groupby('Gender').count()
         print('The counts for each gender are:\n',Gender['Count'].to_string(header=None),'\n')
-        
-    
+
+
     #Display max, min, and most common birth year if data available
     if 'Birth Year' not in df.columns:
         print('There is no birth year information available in this data set.\n')
@@ -209,7 +209,7 @@ def display_data(df):
         else:
             print('\nOkay, you can always view more data later by restarting the program.')
             break
-    
+
 
 def main():
     while True:
@@ -221,6 +221,7 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
         display_data(df)
+        #after each function is run, ask the user if they would like to restart
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
