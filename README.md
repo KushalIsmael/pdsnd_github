@@ -11,16 +11,7 @@ This project was created for the Udacity nanodegree in Programming for Data Scie
 
 ### Files used
 This project uses three csv files with 3,000 individual bikeshare trip data for:
- * Chicago
-  * Start Time
-  * End Time
-  * Trip Duration
-  * Start Station
-  * End Station
-  * User Type
-  * Gender
-  * Birth Year
- * New York City
+ * __Chicago__
    * Start Time
    * End Time
    * Trip Duration
@@ -29,7 +20,16 @@ This project uses three csv files with 3,000 individual bikeshare trip data for:
    * User Type
    * Gender
    * Birth Year
- * Washington
+ * __New York City__
+   * Start Time
+   * End Time
+   * Trip Duration
+   * Start Station
+   * End Station
+   * User Type
+   * Gender
+   * Birth Year
+ * __Washington__
    * Start Time
    * End Time
    * Trip Duration
